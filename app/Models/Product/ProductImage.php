@@ -2,17 +2,18 @@
 
 namespace App\Models\Product;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use App\Models\Storage\Storage;
 
-class Size extends Model
+class ProductImage extends Model
 {
-    protected $table = 'sizes';
+    protected $table = 'product_images';
 
     protected $fillable
         = [
-            'title',
+            'product_id',
+            'path',
             'created_at',
             'updated_at',
         ];
@@ -20,26 +21,26 @@ class Size extends Model
     protected $casts
         = [
             'id'         => 'integer',
-            'title'      => 'string',
+            'product_id' => 'integer',
+            'path'       => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
 
         ];
-
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): string
+    public function getProductId(): int
     {
-        return $this->title;
+        return $this->product_id;
     }
 
-    public function getQuantity(): int
+    public function getPath(): string
     {
-        return $this->pivot->quantity;
+        return $this->path;
     }
 
     public function getCreatedAt(): Carbon
@@ -51,5 +52,4 @@ class Size extends Model
     {
         return $this->updated_at;
     }
-    
 }

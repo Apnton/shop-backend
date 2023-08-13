@@ -13,6 +13,8 @@ class Category extends Model
     protected $fillable
         = [
             'title',
+            'slug',
+            'caption',
             'image',
             'created_at',
             'updated_at',
@@ -20,7 +22,10 @@ class Category extends Model
 
     protected $casts
         = [
+            'id'         => 'integer',
             'title'      => 'string',
+            'slug'       => 'string',
+            'caption'    => 'string',
             'image'      => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -40,6 +45,16 @@ class Category extends Model
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function getCaption(): ?string
+    {
+        return $this->caption;
     }
 
     public function getImage(): ?string

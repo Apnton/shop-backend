@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Api\Product;
 
 use App\Actions\EmptyRequest;
 use App\Http\Controllers\Controller;
-use App\Actions\Product\GetCategoriesAction;
-use App\Http\Presenters\Product\CategoryPresenter;
+use App\Actions\Product\GetColorsAction;
+use App\Http\Presenters\Product\ColorPresenter;
 
-class CategoryController extends Controller
+class ColorController extends Controller
 {
     public function index(
-        GetCategoriesAction $action,
-        CategoryPresenter $presenter
+        GetColorsAction $action,
+        ColorPresenter $presenter
     ) {
         $result = $action->execute(
             new EmptyRequest()

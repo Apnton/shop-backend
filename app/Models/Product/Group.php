@@ -3,12 +3,12 @@
 namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use App\Models\Storage\Storage;
 
-class Size extends Model
+class Group extends Model
 {
-    protected $table = 'sizes';
+    protected $table = 'groups';
 
     protected $fillable
         = [
@@ -26,6 +26,10 @@ class Size extends Model
 
         ];
 
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
 
     public function getId(): int
     {
@@ -37,11 +41,6 @@ class Size extends Model
         return $this->title;
     }
 
-    public function getQuantity(): int
-    {
-        return $this->pivot->quantity;
-    }
-
     public function getCreatedAt(): Carbon
     {
         return $this->created_at;
@@ -51,5 +50,5 @@ class Size extends Model
     {
         return $this->updated_at;
     }
-    
+
 }
