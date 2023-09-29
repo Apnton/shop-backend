@@ -7,6 +7,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 class Product extends Model
@@ -69,6 +70,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
     public function scopeColor(Builder $query, ?int $color_id): Builder
     {
         return $color_id ? $query->whereRelation('color', 'id', $color_id) :  $query;
@@ -79,9 +85,14 @@ class Product extends Model
         return $category_id ? $query->whereRelation('category', 'id', $category_id) :  $query;
     }
 
+    public function scopeCategoryBySlug(Builder $query, ?string $slug): Builder
+    {
+        return $slug ? $query->whereRelation('category', 'slug', $slug) :  $query;
+    }
+
     public function scopeSize(Builder $query, ?int $size_id): Builder
     {
-        return $size_id ? $query->whereRelation('category', 'id', $size_id) :  $query;
+        return $size_id ? $query->whereRelation('sizes', 'id', $size_id) :  $query;
     }
 
     public function getId(): int

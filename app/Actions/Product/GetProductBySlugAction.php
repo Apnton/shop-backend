@@ -21,7 +21,9 @@ final class GetProductBySlugAction extends Action
 
     public function execute(Request $request): Search
     {
-        $product = $this->model->with(['color', 'sizes'])->first();
+        $product = $this->model->with(['color', 'sizes', 'images'])
+            ->where('slug', $request->getSlug())
+            ->first();
 
         $group = $this->model->with(['color', 'sizes'])
             ->where('group_id', $product->getGroupId())

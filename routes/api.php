@@ -7,16 +7,6 @@ use App\Http\Controllers\Api\Product\CategoryController;
 use App\Http\Controllers\Api\Product\ColorController;
 use App\Http\Controllers\Api\Product\SizeController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -25,10 +15,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('products')->group(function() {
 
     Route::get('/', [ProductController::class, 'index']);
-    Route::get('/show', [ProductController::class, 'show']);
+    Route::get('/show/{slug}', [ProductController::class, 'getBySlug']);
 
     Route::prefix('categories')->group(function() {
         Route::get('/', [CategoryController::class, 'index']);
+        Route::get('/{slug}', [CategoryController::class, 'getBySlug']);
     });
 
     Route::prefix('colors')->group(function() {

@@ -22,9 +22,10 @@ class ProductsValidationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'color_id'    => 'nullable|integer',
-            'size_id'     => 'nullable|integer',
-            'category_id' => 'nullable|integer',
+            'color_id'      => 'nullable|integer',
+            'size_id'       => 'nullable|integer',
+            'category_id'   => 'nullable|integer',
+            'category_slug' => 'nullable|string',
         ];
     }
 }

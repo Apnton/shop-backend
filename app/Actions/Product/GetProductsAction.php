@@ -18,16 +18,12 @@ final class GetProductsAction extends Action
         $this->model = $model;
     }
 
-    /*
-     * TODO
-     * change size scope
-     */
-
     public function execute(Request $request): LengthAwarePaginator
     {
         return $this->model->with(['category', 'sizes', 'color'])
             ->color($request->getColorId())
             ->category($request->getCategoryId())
+            ->categoryBySlug($request->getCategorySlug())
             ->size($request->getSizeId())
             ->paginate(8);
     }

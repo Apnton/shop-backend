@@ -9,17 +9,20 @@ use App\Actions\Request;
 class GetProductsRequest extends Request
 {
     protected ?int $colorId;
-    protected ?int $categoryId;
     protected ?int $sizeId;
+    protected ?int $categoryId;
+    protected ?string $categorySlug;
 
     public function __construct(
         ?int $colorId,
+        ?int $sizeId,
         ?int $categoryId,
-        ?int $sizeId
+        ?string $categorySlug
     ) {
         $this->colorId = $colorId;
-        $this->categoryId = $categoryId;
         $this->sizeId = $sizeId;
+        $this->categoryId = $categoryId;
+        $this->categorySlug = $categorySlug;
     }
 
     public function getColorId(): ?int
@@ -27,14 +30,19 @@ class GetProductsRequest extends Request
         return $this->colorId;
     }
 
+    public function getSizeId(): ?int
+    {
+        return $this->sizeId;
+    }
+
     public function getCategoryId(): ?int
     {
         return $this->categoryId;
     }
 
-    public function getSizeId(): ?int
+    public function getCategorySlug(): ?string
     {
-        return $this->sizeId;
+        return $this->categorySlug;
     }
 
 
